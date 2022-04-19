@@ -1,4 +1,4 @@
-package com.example.security1.auth;
+package com.example.security1.config.auth;
 
 
 // 시큐리티가 /login 주소로 요청이 오면 낚아채서 로그인을 진행

@@ -11,6 +11,8 @@ public class User {
     private String id;
     private String email;
     private Timestamp createDate;
+    private String provider; // 구글 로그인 시 "google"가 들어감
+    private String providerId; // 구글 계정 PK값
 
     public String getUsername() {
         return username;
@@ -58,5 +60,13 @@ public class User {
 
     public void setCreateDate(Timestamp createDate) {
         this.createDate = createDate;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 }
