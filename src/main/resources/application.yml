@@ -1,0 +1,30 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/security?serverTimezone=Asia/Seoul
+    username: cos
+    password: cos1234
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google: # /oauth2/authorization/google 이 주소를 동작하게 한다.
+            client-id: 88545216439-9pib5b7nrbt0t87esk0j449dvgmqqrte.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+
+mybatis:
+  type-aliases-package: com.otrodevym.spring
+  mapper-locations: mybatis/mapper/**/*.xml
