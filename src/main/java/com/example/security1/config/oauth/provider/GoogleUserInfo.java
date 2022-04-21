@@ -2,6 +2,7 @@ package com.example.security1.config.oauth.provider;
 
 import java.util.Map;
 
+// 구글 사용자 프로필 정보
 public class GoogleUserInfo implements OAuth2UserInfo{
 
     private Map<String, Object> attributes; // Oauth2user 사용자 프로필 정보
