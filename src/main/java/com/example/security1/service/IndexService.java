@@ -28,6 +28,7 @@ public class IndexService {
         user.setPassword(password);
         user.setEmail(email);
         user.setRole("ROLE_USER");
+        user.setProvider("Default");
 
         String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword); // 패스워드 암호화

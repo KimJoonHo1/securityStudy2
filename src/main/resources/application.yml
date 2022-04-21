@@ -26,6 +26,12 @@ spring:
             scope:
               - email
               - profile
+          facebook: # /oauth2/authorization/google 이 주소를 동작하게 한다.
+            client-id: 354436796502735
+            client-secret: 8f2b91ae79126a623f65d40b7395c19f
+            scope:
+              - email
+              - public_profile
 
 mybatis:
   type-aliases-package: com.otrodevym.spring

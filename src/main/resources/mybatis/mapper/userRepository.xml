@@ -8,7 +8,7 @@
 
     <insert id="save">
         INSERT INTO user
-        (id, username, password, email, role, createDate)
+        (id, username, password, email, role, createDate, provider, providerId)
         VALUES
         (
         (select ifnull(max(a.id), 0)+1 from user a) ,
@@ -16,7 +16,9 @@
         #{user.password},
         #{user.email},
         #{user.role},
-        now()
+        now(),
+        #{user.provider},
+        #{user.providerId}
         );
     </insert>
 </mapper>
