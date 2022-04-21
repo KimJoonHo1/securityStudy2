@@ -21,6 +21,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 
     /**
      * /login로 접속시 해당 메소드가 실행
+     * 메소드 종료후 @AuthenticationPrincipal이 만들어진다 
      * @param username 파라미터
      * @return UserDetails
      * @throws UsernameNotFoundException

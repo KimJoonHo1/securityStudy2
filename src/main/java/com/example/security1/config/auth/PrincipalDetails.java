@@ -9,22 +9,53 @@ package com.example.security1.config.auth;
 // Authentication => UserDetails(PrincipalDetails)
 
 import com.example.security1.model.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
-public class PrincipalDetails implements UserDetails { // UserDetails을 구현한 객체
+@Data
+public class PrincipalDetails implements UserDetails, OAuth2User { // UserDetails, OAuth2User을 구현한 객체
 
     private User user; // 콤포지션
+    private Map<String, Object> attributes; // Oauth 로그인시 구글 사용자 프로필 정보
 
+    /**
+     * 일반 로그인 생성자
+     * @param user model
+     */
     public PrincipalDetails(User user) {
         this.user = user;
     }
 
-    
-    // 해당 유저의 권한을 리턴
+    /**
+     *  OAuth 로그인 생성자
+     * @param user model
+     * @param attirubtes 구글 프로필 정보
+     */
+    public PrincipalDetails(User user, Map<String, Object> attirubtes) {
+        this.user = user;
+        this.attributes = attributes;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+
+    /**
+     * 해당 유저의 권한을 리턴
+     * @return Collection
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collect = new ArrayList<>();
@@ -68,4 +99,5 @@ public class PrincipalDetails implements UserDetails { // UserDetails을 구현�
     public boolean isEnabled() {
         return true;
     }
+
 }

@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login()
                 .loginPage("/loginForm") // Tip. 코드 x (엑세스토큰 + 사용자 프로필 정보) o
                 .userInfoEndpoint()
-                .userService(principalOauth2UserService);
+                .userService(principalOauth2UserService); // 구글 로그인 후 처리 서비스 등록
 
     }
 }
