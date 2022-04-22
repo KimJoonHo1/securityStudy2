@@ -55,7 +55,7 @@ public class IndexController {
      * @return String
      * Oauth2로 로그인한 사용자의 세션 정보는 개발자가 정의한 모델이 아닌 OAuth2User 객체로 받아야함
      */
-    /*
+
     @GetMapping("/test/oauth/login")
     @ResponseBody
     // Authentication 객체 또는 @AuthenticationPrincipal을 통해 세션 정보를 가져올 수 있음
@@ -67,7 +67,7 @@ public class IndexController {
         System.out.println("oauth2User : " + oauth.getAttributes());
         return "Oauth 세션 정보 확인하기";
     }
-    */
+
 
 
     @GetMapping({"", "/"})
