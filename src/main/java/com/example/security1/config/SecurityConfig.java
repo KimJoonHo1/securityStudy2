@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @Configuration
 @EnableWebSecurity // 스프링 시큐리티 필터가 스프링 필터체인에 등록
@@ -16,7 +17,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    private AuthenticationFailureHandler customFailureHandler;
+
+    @Autowired
     private PrincipalOauth2UserService principalOauth2UserService;
+
+    public SecurityConfig() {
+    }
 
     @Bean // 해당 메소드의 리턴되는 오브젝트를 빈으로 등록
     public BCryptPasswordEncoder encodePwd() {
@@ -38,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/loginForm") // 권한이 없는 페이지에 접근시 /loginForm으로 이동
                 .loginProcessingUrl("/login") // /login 주소가 호출이 되면 시큐리티가 로그인을 대신 진행함.
-                .defaultSuccessUrl("/")
+                .failureHandler(customFailureHandler)
+                .defaultSuccessUrl("/") // 로그인 성공 후 이동할 주소
                 .and()
                 .oauth2Login()
                 .loginPage("/loginForm") // Tip. 코드 x (엑세스토큰 + 사용자 프로필 정보) o

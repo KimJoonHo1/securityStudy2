@@ -35,9 +35,9 @@ public class PrincipalDetails implements UserDetails, OAuth2User { // UserDetail
     /**
      *  OAuth 로그인 생성자
      * @param user model
-     * @param attirubtes 구글 프로필 정보
+     * @param attributes 구글 프로필 정보
      */
-    public PrincipalDetails(User user, Map<String, Object> attirubtes) {
+    public PrincipalDetails(User user, Map<String, Object> attributes) {
         this.user = user;
         this.attributes = attributes;
     }
