@@ -101,8 +101,13 @@ public class IndexController {
     }
 
     @GetMapping("/loginForm")
-    public String loginForm() {
-        return "loginForm";
+    public String loginForm(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        if(principalDetails == null) {
+            return "loginForm";
+        } else {
+            return "redirect:/";
+        }
+
     }
 
     @GetMapping("/joinForm")
