@@ -60,10 +60,10 @@ public class IndexController {
     @ResponseBody
     // Authentication 객체 또는 @AuthenticationPrincipal을 통해 세션 정보를 가져올 수 있음
     public String testOAuthLogin(Authentication authentication,
-                                 @AuthenticationPrincipal OAuth2User oauth) {
+                                 @AuthenticationPrincipal PrincipalDetails oauth) {
         System.out.println("/test/oauth/login ================");
-        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-        System.out.println("authentication : " + oAuth2User.getAttributes());
+        PrincipalDetails oauth2 = (PrincipalDetails) authentication.getPrincipal();
+        System.out.println("authentication : " + oauth2.getAttributes());
         System.out.println("oauth2User : " + oauth.getAttributes());
         return "Oauth 세션 정보 확인하기";
     }
@@ -84,7 +84,7 @@ public class IndexController {
     @GetMapping("/user")
     @ResponseBody
     public String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-        System.out.println("principalDetails : " + principalDetails.getUser());
+        System.out.println("principalDetails : " + principalDetails.getAttributes());
         return "user";
     }
 
@@ -101,13 +101,14 @@ public class IndexController {
     }
 
     @GetMapping("/loginForm")
-    public String loginForm(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-        if(principalDetails == null) {
-            return "loginForm";
-        } else {
-            return "redirect:/";
-        }
-
+    public String loginForm(
+            @RequestParam(value = "error", required = false)String error,
+            @RequestParam(value = "exception", required = false) String exception,
+            Model model
+                            ) {
+        model.addAttribute("error", error);
+        model.addAttribute("exception", exception);
+        return "loginForm";
     }
 
     @GetMapping("/joinForm")
